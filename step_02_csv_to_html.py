@@ -7,7 +7,7 @@ def create_html_page(page_number=1, properties_per_page=60, file_path='data\merc
     with open(file_path, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file, delimiter=';')
         for row in reader:
-            if float(row['price'].replace(',', '')) <= 100000 and 'departamento' in row['title'].lower():
+            if float(row['price'].replace(',', '')) <= 100000:
                 data.append(row)
 
     start_index = (page_number - 1) * properties_per_page
