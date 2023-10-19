@@ -79,4 +79,5 @@ def store_csv_to_sqlite(csv_path):
     # Close the connection to the SQLite database
     conn.close()
 
-store_csv_to_sqlite('data/mercadolibre_scraped_data.csv')
+#import os
+#store_csv_to_sqlite(os.path.join(os.path.dirname(__file__), 'data', 'mercadolibre_scraped_data.csv'))

@@ -8,10 +8,6 @@ import shutil
 
 class Scraper():
 
-    def menu(self):
-        self.base_url = 'https://listado.mercadolibre.com.ar/'
-
-
     def extract_property_info(self, soup):
         property_info = {}
 
@@ -74,6 +70,7 @@ class Scraper():
         return property_info
 
     def scraping(self, product_name):
+        self.base_url = 'https://listado.mercadolibre.com.ar/'
         # Clean the user input
         cleaned_name = product_name.replace(" ", "-").lower()
         # Create the urls to scrap
@@ -121,18 +118,16 @@ class Scraper():
                 soup = BeautifulSoup(response.text, 'html.parser')
                 new_post_data = self.extract_property_info(soup)
                 post_data.update(new_post_data)
-
-                    
-    def export_to_csv(self):
+     
+    def export_to_csv(self, path_to_file):
         # export to a csv file
         df = pd.DataFrame(self.data)
         # prevent the index to be stored in the csv
-        df.to_csv(r"data/mercadolibre_scraped_data.csv", sep=";", index=False)
+        df.to_csv(path_to_file, sep=";", index=False)
 
-if __name__ == "__main__":
+def run(search_term='inmuebles en venta en monte grande', path_to_file='data/mercadolibre_scraped_data.csv'):
     s = Scraper()
-    s.menu()
-    s.scraping('inmuebles en venta en monte grande')
+    s.scraping(search_term)
     # Sort self.data by price_per_m2 from lowest to highest
     from datetime import date
     # Filter out entries where 'price_per_m2' is None
@@ -144,7 +139,7 @@ if __name__ == "__main__":
     for item in s.data:
         item['processing_date'] = processing_date
     # Export the data to a CSV file
-    s.export_to_csv()
+    s.export_to_csv(path_to_file)
 
     # Run the analytics.py script
 #    subprocess.run(["python", "analytics.py"])

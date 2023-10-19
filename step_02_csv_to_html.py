@@ -2,9 +2,9 @@
 import csv
 import os
 
-def create_html_page(page_number=1, properties_per_page=60, file_path='data\mercadolibre_scraped_data.csv'):
+def create_html_page(page_number=1, properties_per_page=60, file_path='data/mercadolibre_scraped_data.csv'):
     data = []
-    file_path = os.path.join(os.path.dirname(__file__), file_path)
+    file_path = os.path.join(os.path.dirname(__file__), *file_path.split('/'))
     with open(file_path, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file, delimiter=';')
         for row in reader:
