@@ -6,7 +6,7 @@ import step_03_analytics
 step_01_scrap_data.run('inmuebles en venta en monte grande')
 
 # Run step 2
-step_02_csv_to_html.create_html_page()
+step_02_csv_to_html.run()
 
 # Run step 3
 import os
